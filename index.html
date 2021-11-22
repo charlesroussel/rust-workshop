@@ -1,40 +1,1103 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-		<title>reveal.js</title>
+    <title>Rust workshop</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/solarized.css" />
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>Rust Workshop</section>
+        <section>The rust attraction</section>
+        <section>
+          <h3>Most loved language on stackoverflow for 5 years</h3>
+          <img class="r-stretch" src="dist/rust_stackoverflow.png" />
+          <small>
+            cf
+            <a
+              href="https://insights.stackoverflow.com/survey/2020#technology-most-loved-dreaded-and-wanted-languages-loved"
+              >https://insights.stackoverflow.com/survey/2020#technology-most-loved-dreaded-and-wanted-languages-loved</a
+            >
+          </small>
+        </section>
+        <section>
+          <p>Why scientists are turning to Rust?</p>
+          <p>
+            <a href="https://www.nature.com/articles/d41586-020-03382-2"
+              >Nature article</a
+            >
+          </p>
+        </section>
+        <section>
+          <p>Rust support in android platform</p>
+          <p>
+            <a
+              href="https://security.googleblog.com/2021/04/rust-in-android-platform.html"
+              >https://security.googleblog.com/2021/04/rust-in-android-platform.html</a
+            >
+          </p>
+        </section>
+        <section>
+          <h3>Many other companies</h3>
+          <ul>
+            <li>Dropbox</li>
+            <li>Figma</li>
+            <li>Amazon</li>
+            <li>Microsoft</li>
+            <li>npm</li>
+            <li>Discord</li>
+          </ul>
+        </section>
+        <section>Why rust?</section>
+        <section>
+          Rust is honest about complexity of problems Complex language but with
+          the tools to deal with it.
+        </section>
+        <section>Aim for correctness</section>
+        <section>Compiler is a very strict teacher</section>
+        <section>Strong typing: Traits + Struct</section>
+        <section>Zero cost abstraction</section>
+        <section>Thread safe</section>
+        <section>
+          <h1>Rust course</h1>
+        </section>
+        <section>
+          Rust Book
+          <a href="https://doc.rust-lang.org/">https://doc.rust-lang.org/</a>
+        </section>
+        <section>
+          <h3>Variable</h3>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+          <pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				let a = "a";
+				let b: &str = "a";
+			</code></pre>
+        </section>
+        <section>
+          <h3>Mutating Variables</h3>
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+          <pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				let x = 5;
+				println!("The value of x is: {}", x);
+				x = 6;
+			</code></pre>
+          <pre><code data-trim data-noescape class="language-text">
+error[E0384]: cannot assign twice to immutable variable `x`
+ --> src/main.rs:4:5
+  |
+2 |     let x = 5;
+  |         -
+  |         |
+  |         first assignment to `x`
+  |         help: consider making this binding mutable: `mut x`
+3 |     println!("The value of x is: {}", x);
+4 |     x = 6;
+  |     ^^^^^ cannot assign twice to immutable variable
+</code></pre>
+        </section>
+        <section>
+          <h3>Mutating Variables</h3>
+
+          <pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				let mut x = 5;
+				println!("The value of x is: {}", x);
+				x = 6;
+			</code></pre>
+        </section>
+        <section>
+          <h3>Shadowing</h3>
+          <pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				let a = "toto";
+				let a = a.len()
+			</code></pre>
+        </section>
+
+        <section><h1>Functions</h1></section>
+
+        <section>
+          <h3>Functions</h3>
+          <pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				fn hello() {
+					println!("Hello world");
+				}
+
+				fn main() {
+					hello();
+				}
+			</code></pre>
+        </section>
+
+        <section>
+          <h3>Functions with parameters</h3>
+          <pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				fn hello(name: &str, a: i32) {
+					println!("Hello {}, {}", name, a);
+				}
+
+				fn main() {
+					hello("toto", 123);
+				}
+			</code></pre>
+        </section>
+
+        <section>
+          <h3>Functions with returns</h3>
+          <pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				fn plus_one(a: i32) -> i32 {
+					a + 1
+				}
+
+				fn main() {
+					let a = plus_one(6);
+					println!("{}", a);
+				}
+			</code></pre>
+        </section>
+        <section><h1>Control flow</h1></section>
+        <section>
+          <h3>if Expressions</h3>
+          <pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				fn main() {
+					let a = plus_one(6);
+					if a > 0 {
+						println!("Positive");
+					} else if a < 0 {
+						println!("Negative");
+					} else {
+						println!("Zero");
+					}
+				}
+			</code></pre>
+        </section>
+        <section>
+          <h3>For loops</h3>
+          <pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				let a = [4, 5, 7 ,8];
+				for i in 0..10 {
+					println!("{}", i);
+				}
+			</code></pre>
+        </section>
+        <section>
+          <h3>For loops</h3>
+          <pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				let a = [4, 5, 7 ,8];
+				for i in a {
+					println!("{}", i);
+				}
+			</code></pre>
+        </section>
+
+        <section>
+          <h3>Expressions</h3>
+          <pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				let a = 9
+				let sign = if a > 0 {
+					1
+				} else if a < 0 {
+					-1
+				} else {
+					0
+				};
+			</code></pre>
+        </section>
+
+		<section>
+			String Type
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				let a: &str = "Hello";               // string literal, immutable
+				let b: String = String::from("hello"); // mutable string
+			</code></pre>
+		</section>
+        <section><h1>Ownership</h1></section>
+
+        <section>
+          <h3>Variable scope</h3>
+
+        </section>
+        <section>
+          <h3>Variable scope</h3>
+          <pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				{  // s is not valid here, it’s not yet declared
+					let s = "hello";   // s is valid from this point forward
+
+					// do stuff with s
+				} // this scope is now over, and s is no longer valid
+			</code></pre>
+        </section>
+        <section>
+          <h3>Move semantics</h3>
+          <pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				let x = String::from("hello");
+				let y = x;    // x is not longer valid as its value is moved
+			</code></pre>
+        </section>
+        <section>
+          <h3>Stack-only types</h3>
+          <pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				let x = 5;
+				let y = x;
+				println!("x = {}, y = {}", x, y); // this code is valid
+			</code></pre>
+        </section>
+        <section>
+          <h3>Ownership and functions</h3>
+          <pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				fn main() {
+					let s = String::from("hello");  // s comes into scope
+
+					takes_ownership(s);  // s's value moves into the function...
+					// ... and so is no longer valid here
+					let x = 5;
+				} // x then s goes out of scope here
+
+				fn takes_ownership(some_string: String) { // some_string comes into scope
+					println!("{}", some_string);
+				} // Here, some_string goes out of scope and `drop` is called.
+				// The backing memory is freed.
+			</code></pre>
+        </section>
+
+        <section>
+          <h3>Ownership and functions</h3>
+          <pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				fn gives_ownership() -> String { // gives_ownership will move its
+					// return value into the function
+					// that calls it
+
+					let some_string = String::from("yours"); // some_string comes into scope
+
+					some_string // some_string is returned and
+					// moves out to the calling
+					// function
+				}
+			</code></pre>
+        </section>
+		<section><h1>References and borrowing</h1></section>
+		<section>
+			<h3>Borrowing</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				fn main() {
+					let s1 = String::from("hello");
+
+					let len = calculate_length(&s1);
+
+					println!("The length of '{}' is {}.", s1, len);
+				}
+
+				fn calculate_length(s: &String) -> usize {
+					s.len()
+				}
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>Immutable Borrowing</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				fn main() {
+					let s = String::from("hello");
+
+					change(&s);
+				}
+
+				fn change(some_string: &String) {
+					some_string.push_str(", world"); // does not compile
+				}
+			  </code></pre>
+
+			  <pre><code data-trim data-noescape class="language-text"
+				style="font-size: 0.7em !important;"
+				>error[E0596]: cannot borrow `*some_string` as mutable, as it is behind a `&` reference
+ --> src/main.rs:8:5
+  |
+7 | fn change(some_string: &String) {
+  |                        ------- help: consider changing this to be a mutable reference: `&mut String`
+8 |     some_string.push_str(", world");
+  |     ^^^^^^^^^^^ `some_string` is a `&` reference, so the data it refers to cannot be borrowed as mutable
+				</code></pre>
+		</section>
+
+		<section>
+			<h3>Mutable Borrowing</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				fn main() {
+					let mut s = String::from("hello");
+
+					change(&mut s);
+				}
+
+				fn change(some_string: &mut String) {
+					some_string.push_str(", world");
+				}
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>Mutable Borrowing</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				fn main() {
+					let mut s = String::from("hello");
+					let a = &mut s;
+					let b = &mut s;
+					println!("{}, {}", r1, r2);
+				}
+			  </code></pre>
+
+			  <pre><code data-trim data-noescape class="language-text">error[E0499]: cannot borrow `s` as mutable more than once at a time
+ --> src/main.rs:5:14
+  |
+4 |     let r1 = &mut s;
+  |              ------ first mutable borrow occurs here
+5 |     let r2 = &mut s;
+  |              ^^^^^^ second mutable borrow occurs here
+6 |
+7 |     println!("{}, {}", r1, r2);
+  |                        -- first borrow later used here
+				</code></pre>
+			  <aside></aside>
+		</section>
+		<section>
+			<h1>Struct</h1>
+		</section>
+		<section>
+
+			<h3>Declaring a struct and instanciating</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				struct User {
+					active: bool,
+					username: String,
+					email: String,
+					sign_in_count: u64,
+				}
+			  </code></pre>
+
+			  <pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				let user = User {
+					active: true,
+					username: "Charles".into(),
+					email: "some@email.com",
+					sign_in_count: 18
+				}
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>Creating a struct from others</h3>
+
+			  <pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				let user = User {
+					active: true,
+					username: "Charles".into(),
+					email: "some@email.com".into(),
+					sign_in_count: 18
+				}
+
+				let user2 = {
+					email: "other@email.com".into(),
+					..user
+				}
+			  </code></pre>
+		</section>
+		<section>
+			<h3>Tuple struct</h3>
+
+			  <pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				struct Color(u8, u8, u8);
+
+				let black = Color(0, 0, 0);
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>Methods</h3>
+
+			  <pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				struct Rectangle {
+					width: u32,
+					height: u32,
+				}
+
+				impl Rectangle {
+					fn area(&self) -> u32 {
+						self.width * self.height
+					}
+				}
+
+				fn main() {
+					let rect1 = Rectangle {
+						width: 30,
+						height: 50,
+					};
+
+					println!(
+						"The area of the rectangle is {} square pixels.",
+						rect1.area()
+					);
+				}
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>Methods</h3>
+
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				impl Rectangle {
+					fn area(self: &Self) -> u32 {
+						self.width * self.height
+					}
+				}
+			  </code></pre>
+
+			  <pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				impl Rectangle {
+					fn area(&self) -> u32 {
+						self.width * self.height
+					}
+				}
+			  </code></pre>
+		</section>
+		<section>
+			<h3>Methods</h3>
+
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				impl Rectangle {
+					fn area(self: &mut Self) -> u32 {
+						self.width * self.height
+					}
+				}
+			  </code></pre>
+
+			  <pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				impl Rectangle {
+					fn area(&mut self) -> u32 {
+						self.width * self.height
+					}
+				}
+			  </code></pre>
+		</section>
+
+		<section>
+			<h1>Enums and Pattern matching</h1>
+		</section>
+		<section>
+			Rust’s enums are most similar to algebraic data types in functional languages
+		</section>
+		<section>
+			<h3>Declaring Enum</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				enum Message {
+					Quit,
+					Move { x: i32, y: i32 },
+					Write(String),
+					ChangeColor(i32, i32, i32),
+				}
+			  </code></pre>
+
+			  <pre><code data-line-numbers data-trim data-noescape class="language-rust">
+					let m = Message::Quit;
+					let m = Message::Move {x: 5, y: 9};
+					let m = Message::Write("some message".into())
+					let m = Message::ChangeColor(0, 255, 0)
+			  </code></pre>
+
+		</section>
+		<section>
+			<h3>Option enum</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				enum Option<T> {
+					None,
+					Some(T),
+				}
+			  </code></pre>
+		</section>
+		<section>
+			<h3>Result enum</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				enum Result<T, E> {
+					Ok(T),
+					Err(E),
+				}
+			  </code></pre>
+		</section>
+		<section>
+			<h3>Match</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				fn plus_one(x: Option<i32>) -> Option<i32> {
+					match x {
+						None => None,
+						Some(i) => Some(i + 1),
+					}
+				}
+
+				let five = Some(5);
+    			let six = plus_one(five);
+    			let none = plus_one(None);
+			  </code></pre>
+			  <aside>Match are exhaustive</aside>
+		</section>
+
+		<section>
+			<h3>Match are exhaustive</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+
+				let config_max = Some(3u8);
+
+				match config_max {
+					Some(c) => println!("Config is {}", c),
+				} // doest not compile
+			  </code></pre>
+			  <aside>Match are exhaustive</aside>
+		</section>
+
+		<section>
+			<h3>Match</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+
+				let config_max = Some(3u8);
+
+				match config_max {
+					Some(c) => println!("Config is {}", c),
+					_ = > (),
+				} // doest not compile
+			  </code></pre>
+			  <aside>Match are exhaustive</aside>
+		</section>
+
+		<section>
+			<h3>If let</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				let config_max = Some(3u8);
+
+				if let Some(c) = config_max {
+					println!("Config is {}", c);
+				}
+			  </code></pre>
+		</section>
+
+		<section>
+			<h1>Modules and imports</h1>
+		</section>
+		<section>
+			<h3>Modules</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				mod front_of_house {
+					pub mod hosting {
+						pub fn add_to_waitlist() {}
+					}
+				}
+
+				pub fn eat_at_restaurant() {
+					// Absolute path
+					crate::front_of_house::hosting::add_to_waitlist();
+
+					// Relative path
+					front_of_house::hosting::add_to_waitlist();
+				}
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>Modules</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				mod back_of_house {
+					pub struct Breakfast {
+						pub toast: String,
+						seasonal_fruit: String,
+					}
+
+					impl Breakfast {
+						pub fn summer(toast: &str) -> Breakfast {
+							Breakfast {
+								toast: String::from(toast),
+								seasonal_fruit: String::from("peaches"),
+							}
+						}
+					}
+				}
+
+				pub fn eat_at_restaurant() {
+					let mut meal = back_of_house::Breakfast::summer("Rye");
+					meal.toast = String::from("Wheat");
+					println!("I'd like {} toast please", meal.toast);
+
+					// The next line won't compile if we uncomment it
+					// meal.seasonal_fruit = String::from("blueberries");
+				}
+			  </code></pre>
+		</section>
+		<section>
+			<h3>Imports</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				use back_of_house::Breakfast;
+
+				fn main() {
+					let mut meal = Breakfast::summer("Rye");
+				}
+			  </code></pre>
+		</section>
+
+		<section>
+			<h1>Collections</h1>
+			<p>
+			<small>
+				<a href="https://doc.rust-lang.org/std/collections/index.html">https://doc.rust-lang.org/std/collections/index.html</a>
+			</small>
+		</p>
+		</section>
+
+		<section>
+			<h3>Vec</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				let mut v = Vec::new();
+				v.push(5);
+				v.push(6);
+				v.push(7);
+				v.push(8);
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>Vec</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				let v = vec![5, 6, 7, 8];
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>Vec</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				{
+					let v = vec![5, 6, 7, 8];
+				} // v is dropped here and call drop on all its elements
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>Reading Vec</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				let mut v = vec![1, 2, 3, 4, 5];
+				let third: &i32 = &v[2];
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>Reading Vec</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				let mut v = vec![1, 2, 3, 4, 5];
+				let does_not_exist = &v[100];    // cause a panic
+				let does_not_exist = v.get(100); // returns an option
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>Reading Vec</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				let v1 = vec![1, 2, 3, 4, 5];
+				for v2 = vec![100; 10000];
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>immutable Iterating</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				let v = vec![100, 32, 57];
+				for i in &v {
+					println!("{}", i);
+				}
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>Mutable Iterating</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				let v = vec![100, 32, 57];
+				for i in &mut v {
+					*i += 100
+				}
+			  </code></pre>
+		</section>
+		<section>
+			<h1>Error Handling</h1>
+		</section>
+		<section>
+			<h3>unrecoverable Errors</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				fn main() {
+					panic!("crash and burn");
+				}
+			  </code></pre>
+
+			  <pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				$ cargo run
+   Compiling panic v0.1.0 (file:///projects/panic)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.25s
+     Running `target/debug/panic`
+thread 'main' panicked at 'crash and burn', src/main.rs:2:5
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>Recoverable Errors with Result</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				enum Result<T, E> {
+					Ok(T),
+					Err(E),
+				}
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>Recoverable Errors with Result</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				use std::fs::File;
+
+				fn main() {
+					let f = File::open("hello.txt");
+
+					let f = match f {
+						Ok(file) => file,
+						Err(error) => panic!("Problem opening the file: {:?}", error),
+					};
+				}
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>Panic on errors</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				use std::fs::File;
+
+				fn main() {
+					let f = File::open("hello.txt").unwrap();
+					let f = File::open("hello.txt").expect("Failed to open hello.txt");
+				}
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>Error propagation</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				use std::fs::File;
+
+				fn read_username() -> Result<String, io::Error> {
+					let f = File::open("hello.txt");
+
+					let mut f = match f {
+						Ok(file) => file,
+						Err(e) => return Err(e),
+					};
+
+					let mut s = String::new();
+
+					match f.read_to_string(&mut s) {
+						Ok(_) => Ok(s),
+						Err(e) => Err(e),
+					}
+				}
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>Error propagation</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				use std::fs::File;
+
+				fn read_username() -> Result<String, io::Error> {
+					let f = File::open("hello.txt")?;
+					let mut s = String::new();
+					f.read_to_string(&mut s)?;
+					Ok(s)
+				}
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>Shorter</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				use std::fs::File;
+
+				fn read_username() -> Result<String, io::Error> {
+					let mut s = String::new();
+					File::open("hello.txt")?.read_to_string(&mut s)?;
+					Ok(s)
+				}
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>Even shorter</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				use std::fs::File;
+
+				fn read_username() -> Result<String, io::Error> {
+					fs::read_to_string("hello.txt")
+				}
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>Main function</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				use std::fs::File;
+
+				fn main() {
+					let f = File::open("hello.txt")?; // does not compile
+				}
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>Main function</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				use std::error:Error;
+				use std::fs::File;
+
+				fn main() -> Result<String, Box<dyn Error>> {
+					let f = File::open("hello.txt")?;
+					Ok(())
+				}
+			  </code></pre>
+		</section>
+
+		<section>
+			<h1>Generics</h1>
+		</section>
+
+		<section>
+			<h3>In Struct</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				struct Point<T> {
+					x: T,
+					y: T,
+				}
+
+				fn main() {
+					let wont_work = Point { x: 5, y: 4.0 };
+					let will_work = Point { x: 5.0, y: 4.0 };
+				}
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>In functions</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				fn largest_signed(slice: &[i32]) -> Option<i32> {
+					// something goes here
+				}
+
+				fn largest_unsigned(slice: &[u32]) -> Option<u32> {
+					// something goes here
+				}
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>In functions</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				fn largest<T>(array: &[T]) -> Option<T> {
+					// something goes here
+				}
+			  </code></pre>
+		</section>
+
+
+		<section>
+			<h3>In methods</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				struct Point<T> {
+					x: T,
+					y: T,
+				}
+
+				impl<T> Point<T> {
+					fn x(&self) -> &T {
+						&self.x
+					}
+				}
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>Specialization</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				impl Point<f32> {
+					fn distance_from_origin(&self) -> f32 {
+						(self.x.powi(2) + self.y.powi(2)).sqrt()
+					}
+				}
+
+				impl Point<i32> {
+					fn distance_from_origin(&self) -> i32 {
+						self.x + self.y
+					}
+				}
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>Shared behavious</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				fn largest<T>(array: &[T]) -> Option<T> {
+					let mut largest = list.get(0);
+					for &item in list {
+						if item > largest {
+							largest = Some(item);
+						}
+					}
+					largest
+				} // won't compile
+			  </code></pre>
+
+			  <pre><code data-line-numbers data-trim data-noescape class="language-console">
+error[E0369]: binary operation `>` cannot be applied to type `T`
+ --> src/main.rs:5:17
+  |
+5 |         if item > largest {
+  |            ---- ^ ------- T
+  |            |
+  |            T
+  |
+help: consider restricting type parameter `T`
+  |
+1 | fn largest<T: std::cmp::PartialOrd>(list: &[T]) -> T {
+  |             ^^^^^^^^^^^^^^^^^^^^^^
+			  </code></pre>
+		</section>
+
+		<section>
+			<h1>Traits</h1>
+		</section>
+
+		<section>
+			<h3>Defining Trait</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				pub trait Summary {
+					fn summarize_author(&self) -> String;
+
+					fn summarize(&self) -> String {
+						format!("(Read more from {}...)", self.summarize_author())
+					}
+				}
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>Implementing Trait</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				pub struct NewsArticle {
+					pub headline: String,
+					pub location: String,
+					pub author: String,
+					pub content: String,
+				}
+
+				impl Summary for NewsArticle {
+					fn summarize(&self) -> String {
+						format!("{}, by {} ({})", self.headline, self.author, self.location)
+					}
+				}
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>Using Trait Bounds</h3>
+
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				pub fn notify(item: &impl Summary) {
+					println!("Breaking news! {}", item.summarize());
+				}
+			  </code></pre>
+
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				pub fn notify<T: Summary>(item: &T) {
+					println!("Breaking news! {}", item.summarize());
+				}
+			  </code></pre>
+		</section>
+
+		<section>
+			<h3>Using Mulitple Trait Bounds</h3>
+
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				pub fn notify<T: Summary + Display>(item: &T) { //... }
+				pub fn notify<T>(item: &T) where T: Summary + Display {...}
+			</code></pre>
+		</section>
+
+		<section>
+			<h3>Returning traits</h3>
+
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				fn returns_summarizable() -> impl Summary {
+				}
+			</code></pre>
+		</section>
+
+
+		<section>
+			<h3>Allowing multiple value for same trait</h3>
+
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				pub trait Draw {
+					fn draw(&self);
+				}
+
+				pub struct Screen {
+					pub components: Vec<Box<dyn Draw>>,
+				}
+			</code></pre>
+		</section>
+        <section>
+			<h1>Thanks</h1>
+		</section>
+
+
+		<section>
+			Workshop
+			<a href="https://rustup.rs/">https://rustup.rs/</a>
+			<a href="https://github.com/rust-lang/rustlings">https://github.com/rust-lang/rustlings</a>
+		</section>
+
+
+		<section>
+          <section>Bibliography</section>
+          <section>
+            <a href="https://fasterthanli.me/">https://fasterthanli.me/</a>
+          </section>
+          https://stackoverflow.blog/2021/03/15/getting-started-with-rust/
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+		width: 1280,
+        height: 720,
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
 </html>
