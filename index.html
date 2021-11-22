@@ -1022,18 +1022,18 @@ help: consider restricting type parameter `T`
 			  </code></pre>
 
 			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
-				pub fn notify<T: Summary>(item: &T) {
+				pub fn notify&lt;T: Summary&gt;(item: &T) {
 					println!("Breaking news! {}", item.summarize());
 				}
-			  </code></pre>
+			</code></pre>
 		</section>
 
 		<section>
 			<h3>Using Mulitple Trait Bounds</h3>
 
 			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
-				pub fn notify<T: Summary + Display>(item: &T) { //... }
-				pub fn notify<T>(item: &T) where T: Summary + Display {...}
+				pub fn notify&lt;T: Summary + Display&gt;(item: &T) { //... }
+				pub fn notify&lt;T&gt;(item: &T) where T: Summary + Display {...}
 			</code></pre>
 		</section>
 
@@ -1056,7 +1056,7 @@ help: consider restricting type parameter `T`
 				}
 
 				pub struct Screen {
-					pub components: Vec<Box<dyn Draw>>,
+					pub components: Vec&lt;Box&lt;dyn Draw&gt;&gt;,
 				}
 			</code></pre>
 		</section>
