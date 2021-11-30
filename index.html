@@ -25,6 +25,16 @@
 			<p><a href="https://charlesroussel.github.io/rust-workshop">
 				https://charlesroussel.github.io/rust-workshop</a></p>
 		</section>
+
+		<section>
+			<h3>Workshop</h3>
+			<p>
+			<a href="https://rustup.rs/">https://rustup.rs/</a>
+		</p>
+		<p>
+			<a href="https://github.com/rust-lang/rustlings">https://github.com/rust-lang/rustlings</a>
+		</p>
+		</section>
         <section>The rust attraction</section>
         <section>
           <h3>Most loved language on stackoverflow for 5 years</h3>
@@ -1065,6 +1075,29 @@ help: consider restricting type parameter `T`
 				}
 			</code></pre>
 		</section>
+
+		<section>
+			<h3>Associated types</h3>
+
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				pub trait Iterator {
+					Type Item;
+
+					fn next(&mut self) -> Option&lt;Self::Item&gt;;
+				}
+				struct Counter {
+					count: usize;
+				}
+
+				impl Iterator for Counter {
+					Type Item = usize;
+
+					fn next(&mut self) -> Option&lt;Self::Item&gt; {
+						/* snip */
+					}
+				}
+			</code></pre>
+		</section>
         <section>
 			<h1>Thanks</h1>
 		</section>
@@ -1072,15 +1105,7 @@ help: consider restricting type parameter `T`
 		<section>
 			<h1>Questions ?</h1>
 		</section>
-		<section>
-			<h3>Workshop</h3>
-			<p>
-			<a href="https://rustup.rs/">https://rustup.rs/</a>
-		</p>
-		<p>
-			<a href="https://github.com/rust-lang/rustlings">https://github.com/rust-lang/rustlings</a>
-		</p>
-		</section>
+
 
 
 		<section>
@@ -1106,6 +1131,9 @@ help: consider restricting type parameter `T`
         slideNumber: true,
 		width: 1280,
         height: 720,
+		margin: 0.04,
+		minScale: 0.2,
+ 		 maxScale: 2.0,
         // Learn about plugins: https://revealjs.com/plugins/
         plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
       });
