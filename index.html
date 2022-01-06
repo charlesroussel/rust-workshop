@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
     />
 
     <title>Rust workshop</title>
@@ -29,11 +29,14 @@
 		<section>
 			<h3>Workshop</h3>
 			<p>
-			<a href="https://rustup.rs/">https://rustup.rs/</a>
-		</p>
-		<p>
-			<a href="https://github.com/rust-lang/rustlings">https://github.com/rust-lang/rustlings</a>
-		</p>
+				<a href="https://rustup.rs/">https://rustup.rs/</a>
+			</p>
+			<p>
+				<a href="https://github.com/rust-lang/rustlings">https://github.com/rust-lang/rustlings</a>
+			</p>
+			<p>
+				<a href="https://github.com/rust-lang/rustlings">https://github.com/rust-lang/rustlings</a>
+			</p>
 		</section>
         <section>The rust attraction</section>
         <section>
@@ -199,7 +202,6 @@ error[E0384]: cannot assign twice to immutable variable `x`
         <section>
           <h3>For loops</h3>
           <pre><code data-line-numbers data-trim data-noescape class="language-rust">
-				let a = [4, 5, 7 ,8];
 				for i in 0..10 {
 					println!("{}", i);
 				}
@@ -437,68 +439,52 @@ error[E0384]: cannot assign twice to immutable variable `x`
 
 		<section>
 			<h3>Methods</h3>
-
 			  <pre><code data-line-numbers data-trim data-noescape class="language-rust">
 				struct Rectangle {
 					width: u32,
 					height: u32,
 				}
+			  </code></pre>
+		</section>
 
+		<section>
+			<h3>Non-mutable Methods</h3>
+			  <pre><code data-line-numbers data-trim data-noescape class="language-rust">
 				impl Rectangle {
 					fn area(&self) -> u32 {
 						self.width * self.height
 					}
 				}
+			  </code></pre>
+		</section>
+		<section>
+			<h3>Mutable Methods</h3>
+			  <pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				impl Rectangle {
+					fn set_width(&mut self, width: u32) {
+						self.width = width
+					}
+				}
+			  </code></pre>
+		</section>
 
+		<section>
+			<h3>Usage</h3>
+			  <pre><code data-line-numbers data-trim data-noescape class="language-rust">
 				fn main() {
-					let rect1 = Rectangle {
-						width: 30,
-						height: 50,
-					};
-
+					let rect1 = Rectangle { width: 30, height: 50 };
 					println!(
 						"The area of the rectangle is {} square pixels.",
 						rect1.area()
 					);
-				}
-			  </code></pre>
-		</section>
 
-		<section>
-			<h3>Methods</h3>
+					let rect1 = mut rect1;
+					rect1.set_width(32_u32);
 
-			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
-				impl Rectangle {
-					fn area(self: &Self) -> u32 {
-						self.width * self.height
-					}
-				}
-			  </code></pre>
-
-			  <pre><code data-line-numbers data-trim data-noescape class="language-rust">
-				impl Rectangle {
-					fn area(&self) -> u32 {
-						self.width * self.height
-					}
-				}
-			  </code></pre>
-		</section>
-		<section>
-			<h3>Methods</h3>
-
-			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
-				impl Rectangle {
-					fn area(self: &mut Self) -> u32 {
-						self.width * self.height
-					}
-				}
-			  </code></pre>
-
-			  <pre><code data-line-numbers data-trim data-noescape class="language-rust">
-				impl Rectangle {
-					fn area(&mut self) -> u32 {
-						self.width * self.height
-					}
+					println!(
+						"The area of the modified rectangle is {} square pixels.",
+						rect1.area()
+					);
 				}
 			  </code></pre>
 		</section>
@@ -507,7 +493,7 @@ error[E0384]: cannot assign twice to immutable variable `x`
 			<h1>Enums and Pattern matching</h1>
 		</section>
 		<section>
-			Rust’s enums are most similar to algebraic data types in functional languages
+			Rust's enums are most similar to algebraic data types in functional languages
 		</section>
 		<section>
 			<h3>Declaring Enum</h3>
@@ -531,7 +517,7 @@ error[E0384]: cannot assign twice to immutable variable `x`
 		<section>
 			<h3>Option enum</h3>
 			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
-				enum Option<T> {
+				enum Option&lt;T&gt; {
 					None,
 					Some(T),
 				}
@@ -540,7 +526,7 @@ error[E0384]: cannot assign twice to immutable variable `x`
 		<section>
 			<h3>Result enum</h3>
 			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
-				enum Result<T, E> {
+				enum Result&lt;T, E&gt; {
 					Ok(T),
 					Err(E),
 				}
@@ -549,7 +535,7 @@ error[E0384]: cannot assign twice to immutable variable `x`
 		<section>
 			<h3>Match</h3>
 			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
-				fn plus_one(x: Option<i32>) -> Option<i32> {
+				fn plus_one(x: Option&lt;i32&gt;) -> Option&lt;i32&gt; {
 					match x {
 						None => None,
 						Some(i) => Some(i + 1),
@@ -557,37 +543,33 @@ error[E0384]: cannot assign twice to immutable variable `x`
 				}
 
 				let five = Some(5);
-    			let six = plus_one(five);
-    			let none = plus_one(None);
+				let six = plus_one(five);
+				let none = plus_one(None);
 			  </code></pre>
-			  <aside>Match are exhaustive</aside>
 		</section>
 
 		<section>
 			<h3>Match are exhaustive</h3>
 			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
-
 				let config_max = Some(3u8);
 
 				match config_max {
 					Some(c) => println!("Config is {}", c),
-				} // doest not compile
+				} // does not compile
 			  </code></pre>
-			  <aside>Match are exhaustive</aside>
 		</section>
 
 		<section>
-			<h3>Match</h3>
+			<h3>Default match</h3>
 			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
-
 				let config_max = Some(3u8);
 
 				match config_max {
 					Some(c) => println!("Config is {}", c),
-					_ = > (),
-				} // doest not compile
+					_ => (),
+				}
 			  </code></pre>
-			  <aside>Match are exhaustive</aside>
+
 		</section>
 
 		<section>
@@ -710,14 +692,14 @@ error[E0384]: cannot assign twice to immutable variable `x`
 		<section>
 			<h3>Reading Vec</h3>
 			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
-				let mut v = vec![1, 2, 3, 4, 5];
+				let v = vec![1, 2, 3, 4, 5];
 				let does_not_exist = &v[100];    // cause a panic
 				let does_not_exist = v.get(100); // returns an option
 			  </code></pre>
 		</section>
 
 		<section>
-			<h3>Reading Vec</h3>
+			<h3>Creating a Vec</h3>
 			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
 				let v1 = vec![1, 2, 3, 4, 5];
 				for v2 = vec![100; 10000];
@@ -725,7 +707,7 @@ error[E0384]: cannot assign twice to immutable variable `x`
 		</section>
 
 		<section>
-			<h3>immutable Iterating</h3>
+			<h3>Immutable Iterating</h3>
 			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
 				let v = vec![100, 32, 57];
 				for i in &v {
@@ -747,7 +729,7 @@ error[E0384]: cannot assign twice to immutable variable `x`
 			<h1>Error Handling</h1>
 		</section>
 		<section>
-			<h3>unrecoverable Errors</h3>
+			<h3>Unrecoverable Errors</h3>
 			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
 				fn main() {
 					panic!("crash and burn");
@@ -767,7 +749,7 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 		<section>
 			<h3>Recoverable Errors with Result</h3>
 			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
-				enum Result<T, E> {
+				enum Result&lt;T, E&gt; {
 					Ok(T),
 					Err(E),
 				}
@@ -807,10 +789,8 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
 				use std::fs::File;
 
-				fn read_username() -> Result<String, io::Error> {
-					let f = File::open("hello.txt");
-
-					let mut f = match f {
+				fn read_username() -> Result&lt;String, io::Error&gt; {
+					let mut f = match File::open("hello.txt") {
 						Ok(file) => file,
 						Err(e) => return Err(e),
 					};
@@ -830,7 +810,7 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
 				use std::fs::File;
 
-				fn read_username() -> Result<String, io::Error> {
+				fn read_username() -> Result&lt;String, io::Error&gt; {
 					let f = File::open("hello.txt")?;
 					let mut s = String::new();
 					f.read_to_string(&mut s)?;
@@ -844,7 +824,7 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
 				use std::fs::File;
 
-				fn read_username() -> Result<String, io::Error> {
+				fn read_username() -> Result&lt;String, io::Error&gt; {
 					let mut s = String::new();
 					File::open("hello.txt")?.read_to_string(&mut s)?;
 					Ok(s)
@@ -857,7 +837,7 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
 				use std::fs::File;
 
-				fn read_username() -> Result<String, io::Error> {
+				fn read_username() -> Result&lt;String, io::Error&gt; {
 					fs::read_to_string("hello.txt")
 				}
 			  </code></pre>
@@ -880,11 +860,12 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 				use std::error:Error;
 				use std::fs::File;
 
-				fn main() -> Result<String, Box<dyn Error>> {
+				fn main() -> Result&lt;String, Box&lt;dyn Error&gt;&gt; {
 					let f = File::open("hello.txt")?;
 					Ok(())
 				}
 			  </code></pre>
+			<aside class="notes">I'll explain later this one</aside>
 		</section>
 
 		<section>
@@ -894,7 +875,7 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 		<section>
 			<h3>In Struct</h3>
 			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
-				struct Point<T> {
+				struct Point&lt;T&gt; {
 					x: T,
 					y: T,
 				}
@@ -909,20 +890,21 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 		<section>
 			<h3>In functions</h3>
 			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
-				fn largest_signed(slice: &[i32]) -> Option<i32> {
+				fn largest_signed(slice: &[i32]) -> Option&lt;i32&gt; {
 					// something goes here
 				}
 
-				fn largest_unsigned(slice: &[u32]) -> Option<u32> {
+				fn largest_unsigned(slice: &[u32]) -> Option&lt;u32&gt; {
 					// something goes here
 				}
 			  </code></pre>
+			  <aside class="notes">Let's say we have two methods that we want to mutualize</aside>
 		</section>
 
 		<section>
 			<h3>In functions</h3>
 			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
-				fn largest<T>(array: &[T]) -> Option<T> {
+				fn largest&lt;T&gt;(array: &[T]) -> Option&lt;T&gt; {
 					// something goes here
 				}
 			  </code></pre>
@@ -932,12 +914,12 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 		<section>
 			<h3>In methods</h3>
 			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
-				struct Point<T> {
+				struct Point&lt;T&gt; {
 					x: T,
 					y: T,
 				}
 
-				impl<T> Point<T> {
+				impl&lt;T&gt; Point&lt;T&gt; {
 					fn x(&self) -> &T {
 						&self.x
 					}
@@ -948,13 +930,13 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 		<section>
 			<h3>Specialization</h3>
 			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
-				impl Point<f32> {
+				impl Point&lt;f32&gt; {
 					fn distance_from_origin(&self) -> f32 {
 						(self.x.powi(2) + self.y.powi(2)).sqrt()
 					}
 				}
 
-				impl Point<i32> {
+				impl Point&lt;i32&gt; {
 					fn distance_from_origin(&self) -> i32 {
 						self.x + self.y
 					}
@@ -965,7 +947,7 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 		<section>
 			<h3>Shared behavious</h3>
 			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
-				fn largest<T>(array: &[T]) -> Option<T> {
+				fn largest&lt;T&gt;(array: &[T]) -> Option&lt;T&gt; {
 					let mut largest = list.get(0);
 					for &item in list {
 						if item > largest {
@@ -979,17 +961,17 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 			  <pre><code data-line-numbers data-trim data-noescape class="language-console">
 error[E0369]: binary operation `>` cannot be applied to type `T`
  --> src/main.rs:5:17
-  |
 5 |         if item > largest {
   |            ---- ^ ------- T
   |            |
   |            T
-  |
 help: consider restricting type parameter `T`
   |
-1 | fn largest<T: std::cmp::PartialOrd>(list: &[T]) -> T {
+1 | fn largest&lt;T: std::cmp::PartialOrd&gt;(list: &[T]) -> T {
   |             ^^^^^^^^^^^^^^^^^^^^^^
 			  </code></pre>
+
+			  <aside class="notes">Compiler is telling us to use a trait bound</aside>
 		</section>
 
 		<section>
@@ -1063,7 +1045,7 @@ help: consider restricting type parameter `T`
 
 
 		<section>
-			<h3>Allowing multiple value for same trait</h3>
+			<h3>Allowing multiple value for same trait (dynamic dispatch)</h3>
 
 			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
 				pub trait Draw {
@@ -1082,16 +1064,15 @@ help: consider restricting type parameter `T`
 			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
 				pub trait Iterator {
 					Type Item;
-
 					fn next(&mut self) -> Option&lt;Self::Item&gt;;
 				}
+
 				struct Counter {
 					count: usize;
 				}
 
 				impl Iterator for Counter {
 					Type Item = usize;
-
 					fn next(&mut self) -> Option&lt;Self::Item&gt; {
 						/* snip */
 					}
@@ -1129,11 +1110,11 @@ help: consider restricting type parameter `T`
       Reveal.initialize({
         hash: true,
         slideNumber: true,
-		width: 1280,
-        height: 720,
-		margin: 0.04,
-		minScale: 0.2,
- 		 maxScale: 2.0,
+		width: "100%",
+        height: "100%",
+		margin: 0.0,
+		minScale: 1,
+ 		maxScale: 1,
         // Learn about plugins: https://revealjs.com/plugins/
         plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
       });
