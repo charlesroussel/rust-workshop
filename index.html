@@ -34,8 +34,9 @@
 			<p>
 				<a href="https://github.com/rust-lang/rustlings">https://github.com/rust-lang/rustlings</a>
 			</p>
+			If you don't want to install anything
 			<p>
-				<a href="https://github.com/rust-lang/rustlings">https://github.com/rust-lang/rustlings</a>
+				<a href="https://gitpod.io/#https://github.com/rust-lang/rustlings">https://gitpod.io/#https://github.com/rust-lang/rustlings</a>
 			</p>
 		</section>
         <section>The rust attraction</section>
@@ -95,6 +96,10 @@
           Rust Book
           <a href="https://doc.rust-lang.org/">https://doc.rust-lang.org/</a>
         </section>
+		<section>
+			<h3>Variables</h3>
+			<p>Book chapter 3.1</p> <p> Rustlings variables</p>
+		</section>
         <section>
           <h3>Variable</h3>
 
@@ -142,7 +147,10 @@ error[E0384]: cannot assign twice to immutable variable `x`
 			</code></pre>
         </section>
 
-        <section><h1>Functions</h1></section>
+        <section>
+			<h1>Functions</h1>
+			<p>Book chapter 3.3</p><p>Rustlings functions<p>
+		</section>
 
         <section>
           <h3>Functions</h3>
@@ -183,7 +191,10 @@ error[E0384]: cannot assign twice to immutable variable `x`
 				}
 			</code></pre>
         </section>
-        <section><h1>Control flow</h1></section>
+        <section><h1>Control flow</h1>
+			<p>Book chapter 3.5</p>
+			<p>Rustlings if</p>
+		</section>
         <section>
           <h3>if Expressions</h3>
           <pre><code data-line-numbers data-trim data-noescape class="language-rust">
@@ -191,7 +202,7 @@ error[E0384]: cannot assign twice to immutable variable `x`
 					let a = plus_one(6);
 					if a > 0 {
 						println!("Positive");
-					} else if a < 0 {
+					} else if a &lt; 0 {
 						println!("Negative");
 					} else {
 						println!("Zero");
@@ -241,8 +252,9 @@ error[E0384]: cannot assign twice to immutable variable `x`
         <section><h1>Ownership</h1></section>
 
         <section>
-          <h3>Variable scope</h3>
-
+          <h1>Variable scope & Move semantics</h1>
+		  <p>Book chapter 4.1</p>
+		  <p>Rustlings move-semantics</p>
         </section>
         <section>
           <h3>Variable scope</h3>
@@ -302,7 +314,9 @@ error[E0384]: cannot assign twice to immutable variable `x`
 				}
 			</code></pre>
         </section>
-		<section><h1>References and borrowing</h1></section>
+		<section><h1>References and borrowing</h1>
+			<p>Book chapter 4.2</p>
+		</section>
 		<section>
 			<h3>Borrowing</h3>
 			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
@@ -383,10 +397,23 @@ error[E0384]: cannot assign twice to immutable variable `x`
 7 |     println!("{}, {}", r1, r2);
   |                        -- first borrow later used here
 				</code></pre>
-			  <aside></aside>
+		</section>
+
+		<section>
+			<h1>Pause for exercise</h1>
+			<ul>
+				<li>variables</li>
+				<li>functions</li>
+				<li>if</li>
+				<li>quizz1</li>
+				<li>move_semantics</li>
+				<li>primitive_types</li>
+			</ul>
 		</section>
 		<section>
 			<h1>Struct</h1>
+			<p>Book chapter 4.1</p>
+		  	<p>Rustlings structs</p>
 		</section>
 		<section>
 
@@ -869,6 +896,19 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 		</section>
 
 		<section>
+			<h1>Pause for exercise</h1>
+			<ul>
+				<li>structs</li>
+				<li>enums</li>
+				<li>modules</li>
+				<li>collections</li>
+				<li>strings</li>
+				<li>quizz2</li>
+				<li>error_handling</li>
+			</ul>
+		</section>
+
+		<section>
 			<h1>Generics</h1>
 		</section>
 
@@ -1079,6 +1119,16 @@ help: consider restricting type parameter `T`
 				}
 			</code></pre>
 		</section>
+
+		<section>
+			<h1>Pause for exercise</h1>
+			<ul>
+				<li>generics</li>
+				<li>option</li>
+				<li>traits</li>
+			</ul>
+		</section>
+
         <section>
 			<h1>Thanks</h1>
 		</section>
