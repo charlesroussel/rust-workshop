@@ -78,16 +78,15 @@
             <li>Discord</li>
           </ul>
         </section>
-        <section>Why rust?</section>
-        <section>
-          Rust is honest about complexity of problems Complex language but with
-          the tools to deal with it.
-        </section>
-        <section>Aim for correctness</section>
-        <section>Compiler is a very strict teacher</section>
-        <section>Strong typing: Traits + Struct</section>
-        <section>Zero cost abstraction</section>
-        <section>Thread safe</section>
+        <section>Why rust?
+        <ul>
+			<li>Aim for correctness</li>
+			<li>Compiler is a very strict teacher</li>
+			<li>Strong typing: Traits + Struct</li>
+			<li>Zero cost abstraction</li>
+			<li>Compile time thread safe</li>
+		</ul>
+	</section>
         <section>
           <h1>Rust course</h1>
         </section>
@@ -249,22 +248,49 @@ error[E0384]: cannot assign twice to immutable variable `x`
 		  <p>Book chapter 4.1</p>
 		  <p>Rustlings move-semantics</p>
         </section>
-        <section>
-          <h3>Variable scope</h3>
-          <pre><code data-line-numbers data-trim data-noescape class="language-rust">
-				{  // s is not valid here, it's not yet declared
-					let s = "hello";   // s is valid from this point forward
+		<section>
+			<h3>Stack and heap</h3>
+			<ul>
+				<li>Both in memory</li>
+				<li>Stack: item are pushed directly</li>
+				<li>Heap: need allocators and searching for a place</li>
+			</ul>
+			<aside class="notes">
+				Both in memory. Stack faster no need to search for anything.
+				Heap: requires pointers.
+				When calling a function is requires to push item to the stack and poping them at the end.
+			</aside>
+		</section>
+		<section>
+			<h3>Ownership rules</h3>
+			<ul>
+				<li>Each value as a owner</li>
+				<li>Only one owner at a time</li>
+				<li>When the owner goes out of scope, value is dropped</li>
+			</ul>
+		</section>
+		<section>
+			<h3>Variable scope</h3>
+			<pre><code data-line-numbers data-trim data-noescape class="language-rust">
+				  {  // s is not valid here, it's not yet declared
+					  let s = "hello";   // s is valid from this point forward
 
-					// do stuff with s
-				} // this scope is now over, and s is no longer valid
-			</code></pre>
-        </section>
+					  // do stuff with s
+				  } // this scope is now over, and s is no longer valid
+			  </code></pre>
+			  <aside class="notes">
+				Resource Acquisition Is Initialization (RAII).
+			  </aside>
+		  </section>
         <section>
           <h3>Move semantics</h3>
           <pre><code data-line-numbers data-trim data-noescape class="language-rust">
 				let x = String::from("hello");
 				let y = x;    // x is not longer valid as its value is moved
 			</code></pre>
+			<aside class="notes">
+				Strings are allocated on the heap.
+			  </aside>
         </section>
         <section>
           <h3>Stack-only types (Copy types)</h3>
